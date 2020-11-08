@@ -20,7 +20,7 @@ class Analyze(Singleton):
         else:
             best = self.best_single()
 
-        result = "Player Name: {}\n".format(best)
+        result = "\nPlayer Name: {}\n".format(best)
         for stat_type, stat in self.filtered[best].items():
             result += "{}: {}\n".format(stat_type, stat)
 

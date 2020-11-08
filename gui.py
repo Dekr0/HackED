@@ -34,6 +34,14 @@ class MainFramework(QWidget):
         self.init_age_selection()
         self.init_team_selection()
 
+        self.button = QPushButton("Search")
+        self.layout = QVBoxLayout()
+
+        self.layout.addWidget(self.stat_box)
+        self.layout.addWidget(self.age_box)
+        self.layout.addWidget(self.pos_box)
+        self.layout.addWidget(self.team_box)
+
     def init_type_selection(self):
         self.stat_box = QGroupBox("Stat Type")
         self.stat_layout = QHBoxLayout()
@@ -72,7 +80,7 @@ class MainFramework(QWidget):
         self.team_layout = QHBoxLayout()
         self.team_combobox = QComboBox()
 
-        self.team_combobox.addItems(POSITION.values())
+        self.team_combobox.addItems(TEAM.values())
 
         self.team_layout.addWidget(self.team_combobox)
 

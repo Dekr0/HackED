@@ -1,14 +1,23 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+import sys
+from os import path
 from config import TEAM
 from fetch import *
 from analyze import *
 
 
 def main():
+
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        bundle_dir = getattr(sys, "_MEIPASS", path.abspath(path.dirname(__file__)))
+        prompt = path.abspath(path.join(bundle_dir, "description.txt"))
+    else:
+        prompt = "description.txt"
+
     while True:
-        with open("description", "r") as f:
+        with open(prompt, "r") as f:
             options = []
             while len(options) != 4:
                 while True:
