@@ -10,7 +10,8 @@ AGE = {
     "2": [24, 29],
     "3": [30, 35],
     "4": [36, 40],
-    "5": [40, 999]
+    "5": [40, 999],
+    "6": [0, 999]
 }
 
 DATA_TAG = ["age",
@@ -21,6 +22,7 @@ DATA_TAG = ["age",
             "plus_minus",
             "pen_min",
             "time_on_ice_avg",
+            "blocks",
             "hits",
             "faceoff_wins",
             "faceoff_percentage"

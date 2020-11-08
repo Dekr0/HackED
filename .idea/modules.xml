@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HackED.iml" filepath="$PROJECT_DIR$/.idea/HackED.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../self-libs/Python/urlextractor/.idea/urlextractor.iml" filepath="$PROJECT_DIR$/../self-libs/Python/urlextractor/.idea/urlextractor.iml" />
     </modules>
   </component>
 </project>

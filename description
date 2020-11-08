@@ -1,0 +1,59 @@
+What type of stat would you like?
+1. Best Goal Scorer
+2. Best Playmaker
+3. Best Offensive Decencemen
+4. Best +/-
+5. Most Time on Ice
+6. Most Penalty Minutes
+7. Best Overall Defenceman
+8. Best Overall Forward
+%Type the number of which stat you want:
+Which position?
+1. Center
+2. Left Wing
+3. Right Wing
+4. Defence
+5. Any
+%Type the number of which position you want:
+Which age range?
+1. 18-23
+2. 24-29
+3. 30-35
+4. 36-40
+5. 40+
+6. Any
+%Type the number of which age range you want:
+Which team do you want?
+1. ANA
+2. ARI
+3. BOS
+4. BUF
+5. CAR
+6. CBJ
+7. CGY
+8. CHI
+9. COL
+10. DAL
+11. DET
+12. EDM
+13. FLO
+14. MIN
+15. LAK
+16. MTL
+17. NSH
+18. NJD
+19. NYI
+20. NYR
+21. OTT
+22. PHI
+23. PIT
+24. SJS
+25. STL
+26. TBL
+27. TOR
+28. VAN
+29. VEG
+30. WSH
+31. WPG
+32. Any
+%Type the number of which team you want:

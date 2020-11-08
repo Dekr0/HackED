@@ -2,8 +2,9 @@
 # -*- coding:utf-8 -*-
 
 from config import *
+from singleton import *
 
-class Analyze:
+class Analyze(Singleton):
 
     def __init__(self, arg, data):
 
@@ -50,25 +51,36 @@ class Analyze:
         pass
 
     def filter(self):
-        filtered = dict()
+        f_age_pos = dict()
+
         for name, stat in self.players.items():
-            if stat["age"] >= AGE[self.arg[2]][0] and stat["age"] <= AGE[self.arg[2]][1] \
-                    and stat["team"] == self.arg[3]:
+            if stat["age"] >= AGE[self.arg[2]][0] and stat["age"] <= AGE[self.arg[2]][1]:
                 if self.arg[0] == "1" or self.arg[0] == "2":
                     if stat["pos"] == POSITION[self.arg[1]]:
-                        filtered[name] = stat
+                        f_age_pos[name] = stat
                 else:
-                    filtered[name] = stat
+                    f_age_pos[name] = stat
+
+        if self.arg[3] == "32":
+            return f_age_pos
+
+        filtered = dict()
+        for name, stat in f_age_pos.items():
+            if stat["team"] == self.arg[3]:
+                filtered[name] = stat
+
+        f_age_pos = None # Destruct
 
         return filtered
 
 
     def handle(self):
-        assert (self.arg[0] in self.options.keys() and self.arg[1] in POSITION.keys()
-                and self.arg[2] in AGE.keys()), "Cannot find keys"
+        # assert (self.arg[0] in self.options.keys() and self.arg[1] in POSITION.keys()
+        #         and self.arg[2] in AGE.keys()), "Cannot find keys"
 
         self.filtered = self.filter()
-        print(self.filtered)
+        for key, value in self.filtered.items():
+            print(key, value)
         assert self.filtered, ("Cannot be empty")
 
         self.analyze()

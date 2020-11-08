@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-# Age, Tm, Pos, G, A, PTS, +/-, PIM, ATOI, BLK, HITS, FOW, FO%
 
 import requests
 import re
@@ -9,9 +8,9 @@ import sys
 from bs4 import BeautifulSoup
 from bs4 import element
 from config import *
+from singleton import *
 
-
-class Crawler:
+class Crawler(Singleton):
 
     def __init__(self):
         self.players = dict()
@@ -44,7 +43,7 @@ class Crawler:
                         value = str(parent.contents[0])
                 self.players[name_team][tag] = value
             else:
-                self.players[name_team][tag] = None
+                self.players[name_team][tag] = 0
 
     def get_data(self):
         self.get_name_team()
