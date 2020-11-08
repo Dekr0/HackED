@@ -4,6 +4,7 @@
 from config import *
 from singleton import *
 
+
 class Analyze(Singleton):
 
     def __init__(self, arg, data):
@@ -12,58 +13,44 @@ class Analyze(Singleton):
 
         self.players = data
         self.arg = arg
-        self.options = {
-            "1": self.best_goal,
-            "2": self.best_play,
-            "3": self.best_od,
-            "4": self.best_pm,
-            "5": self.most_atoi,
-            "6": self.most_pim,
-            "7": self.best_def,
-            "8": self.best_for
-        }
 
     def analyze(self):
-        pass
+        if self.arg[0] == "7" or self.arg[0] == "8":
+            best = getattr(self, OPTIONS[self.arg[0]])()
+        else:
+            best = self.best_single()
 
-    def best_goal(self):
-         return max(self.filtered, key = lambda x: self.filtered[x]["goals"])
+        result = "Player Name: {}\n".format(best)
+        for stat_type, stat in self.filtered[best].items():
+            result += "{}: {}\n".format(stat_type, stat)
 
-    def best_play(self):
-        return max(self.filtered, key = lambda x: self.filtered[x]["assists"])
+        return result
 
-    def best_od(self):
-        #ONLY FOR POSITION = D
-        return max(self.filtered, key = lambda x: self.filtered[x]["points"])
-        
-
-    def best_pm(self):
-        #plus minus
-        j = max(self.filtered, key = lambda x: self.filtered[x]["plus_minus"])
-        print(j)
-        pass
-
-    def most_atoi(self):
-        return max(self.filtered, key = lambda x: self.filtered[x]["time_on_ice_avg"])
-
-    def most_pim(self):
-        retrun max(self.filtered, key = lambda x: self.filtered[x]["pen_min"])
+    def best_single(self):
+        return max(self.filtered, key = lambda  x: self.filtered[x][OPTIONS[self.arg[0]]])
 
     def best_def(self):
-        return max((0.3*(self.filtered, key = lambda x: self.filtered[x]["blocks"])+
-                (0.15*(self.filtered, key = lambda x: self.filtered[x]["hits"]))+
-                (0.15*(self.filtered, key = lambda x: self.filtered[x]["time_on_ice_avg"]))+
-                (0.2*(self.filtered, key = lambda x: self.filtered[x]["points"]))+
-                (0.2*(self.filtered, key = lambda x: self.filtered[x]["plus_minus"]))))
-        
+        return max(self.filtered, key = lambda x:
+                   self.filtered[x]["blocks"] * 0.3
+                   + self.filtered[x]["hits"] * 0.15
+                   + self.filtered[x]["time_on_ice_avg"] * 0.2
+                   + self.filtered[x]["plus_minus"] * 0.2)
 
     def best_for(self):
-        return max((0.3*(self.filtered, key = lambda x: self.filtered[x]["goals"])+
-                (0.2*(self.filtered, key = lambda x: self.filtered[x]["assists"]))+
-                (0.1*(self.filtered, key = lambda x: self.filtered[x]["blocks"]))+
-                (0.1*(self.filtered, key = lambda x: self.filtered[x]["hits"]))+
-                (0.1*(self.filtered, key = lambda x: self.filtered[x]["plus_minus"]))+
-                (0.1*(self.filtered, key = lambda x: self.filtered[x]["faceoff_percentage"]))))
+        return max(self.filtered, key = lambda x:
+                   self.filtered[x]["goals"] * 0.3
+                   + self.filtered[x]["assists"] * 0.2
+                   + self.filtered[x]["blocks"] * 0.1
+                   + self.filtered[x]["hits"] * 0.1
+                   + self.filtered[x]["time_on_ice_avg"] * 0.1
+                   + self.filtered[x]["plus_minus"] * 0.1
+                   + self.filtered[x]["faceoff_percentage"] * 0.1)
+
+    def time(self):
+        for name in self.players.keys():
+            mins, secs = list(map(int, self.players[name]["time_on_ice_avg"].split(":")))
+            atoi = mins * 60 + secs
+            self.players[name]["time_on_ice_avg"] = atoi
 
     def filter(self):
         f_age_pos = dict()
@@ -71,13 +58,18 @@ class Analyze(Singleton):
         for name, stat in self.players.items():
             if stat["age"] >= AGE[self.arg[2]][0] and stat["age"] <= AGE[self.arg[2]][1]:
                 if self.arg[0] == "1" or self.arg[0] == "2":
-                    if stat["pos"] == POSITION[self.arg[1]]:
+                    if self.arg[1] != "5":
+                        if stat["pos"] == POSITION[self.arg[1]]:
+                            f_age_pos[name] = stat
+                    else:
                         f_age_pos[name] = stat
                 else:
                     f_age_pos[name] = stat
 
-        if self.arg[3] == "32":
-            return f_age_pos
+        if self.arg[3] == "33":
+            if f_age_pos:
+                return f_age_pos
+            return False
 
         filtered = dict()
         for name, stat in f_age_pos.items():
@@ -86,16 +78,17 @@ class Analyze(Singleton):
 
         f_age_pos = None # Destruct
 
-        return filtered
+        if filtered:
+            return filtered
+        return False
 
 
     def handle(self):
-        # assert (self.arg[0] in self.options.keys() and self.arg[1] in POSITION.keys()
-        #         and self.arg[2] in AGE.keys()), "Cannot find keys"
 
+        self.time()
         self.filtered = self.filter()
-        for key, value in self.filtered.items():
-            print(key, value)
-        assert self.filtered, ("Cannot be empty")
 
-        self.analyze()
+        if self.filtered:
+            result = self.analyze()
+            return result
+        return "No Result"

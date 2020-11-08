@@ -16,6 +16,7 @@ class Crawler(Singleton):
         self.players = dict()
         self.src = ""
         self.soup = None
+        self.fetched = False
 
     def get_name_team(self):
         name_parents = self.soup.find_all("td", {"data-append-csv": re.compile(".*")})
@@ -51,11 +52,13 @@ class Crawler(Singleton):
             self.get_perform(tag)
 
     def handle(self):
-        self.request()
-        assert self.src, "Fetch nothing"
+        if not self.fetched:
+            self.request()
+            assert self.src, "Fetch nothing"
 
-        self.soup = BeautifulSoup(self.src, "lxml")
-        self.get_data()
+            self.soup = BeautifulSoup(self.src, "lxml")
+            self.get_data()
+            self.fetched = True
 
         return self.players
 
