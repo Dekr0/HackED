@@ -26,9 +26,7 @@ class Query(Singleton):
 
 class MainFramework(QWidget):
 
-    def __init__:
-        pass
-
+    pass
 
 class QueryWindow(QMainWindow):
     pass
