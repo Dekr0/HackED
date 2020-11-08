@@ -5,10 +5,11 @@ WIP, not in used
 """
 
 import sys
-from PyQt5.QtGui import QRegExpValidator
+from config import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from singleton import *
+
 
 
 class Query(Singleton):
@@ -26,7 +27,45 @@ class Query(Singleton):
 
 class MainFramework(QWidget):
 
-    pass
+    def __init__(self):
+        super(MainFramework, self).__init__()
+        self.init_type_selection()
+        self.init_pos_selection()
+        self.init_age_selection()
+        self.init_team_selection()
+
+    def init_type_selection(self):
+        self.stat_box = QGroupBox("Stat Type")
+        self.stat_layout = QHBoxLayout()
+        self.stat_combobox = QComboBox()
+
+        self.stat_combobox.addItems(STAT_TYPE.key())
+
+        self.stat_layout.addWidget(self.stat_combobox)
+
+        self.stat_box.setLayout(self.stat_layout)
+
+    def init_pos_selection(self):
+        self.pos_box = QGroupBox("Player Position")
+        self.pos_layout = QHBoxLayout()
+        self.pos_combobox = QComboBox()
+
+        self.pos_combobox.addItems(POSITION.values())
+
+        self.pos_layout.addWidget(self.pos_combobox)
+
+        self.pos_box.setLayout(self.pos_layout)
+
+    def init_age_selection(self):
+        self.age_box = QGroupBox("Player Position")
+        self.age_layout = QHBoxLayout()
+        self.age_combobox = QComboBox()
+
+        self.age_combobox.addItems(POSITION.values())
+
+        self.age_layout.addWidget(self.age_combobox)
+
+        self.age_box.setLayout(self.age_layout)
 
 class QueryWindow(QMainWindow):
     pass

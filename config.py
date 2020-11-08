@@ -47,6 +47,18 @@ POSITION = {
     "5": "ANY",
 }
 
+# Fixed in furture
+STAT_TYPE = {
+    "Best Goal Scorer": "goals",
+    "Best Playmaker": "assists",
+    "Best Offensive Decencemen": "points",
+    "Best +/-": "plus_minus",
+    "Most Time on Ice": "time_on_ice_avg",
+    "Most Penalty Minutes": "plus_minus",
+    "Best Overall Defenceman": "best_def",
+    "Best Overall Forward": "best_for"
+}
+
 TEAM = {
     "1": 'ANA',
     "2": 'ARI',
