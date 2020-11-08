@@ -14,6 +14,7 @@ from singleton import *
 class Query(Singleton):
 
     def __init__(self):
+        self.
         self.app = QApplication(sys.argv)
         self.framework = MainFramework()
         self.window = QueryWindow(self.framework)

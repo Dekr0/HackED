@@ -57,7 +57,7 @@ class Analyze(Singleton):
 
         for name, stat in self.players.items():
             if stat["age"] >= AGE[self.arg[2]][0] and stat["age"] <= AGE[self.arg[2]][1]:
-                if self.arg[0] == "1" or self.arg[0] == "2":
+                if self.arg[0] != "3" or self.arg[0] != "7":
                     if self.arg[1] != "5":
                         if stat["pos"] == POSITION[self.arg[1]]:
                             f_age_pos[name] = stat
