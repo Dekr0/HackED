@@ -14,11 +14,12 @@ def main():
                 while True:
                     line = f.readline().strip()
                     if line[0] == "%":
-                        options.append(input(line[1:]).strip())
+                        option = input(line[1:]).strip()
+                        if option == "exit" or option == "quit":
+                            quit()
+                        options.append(option)
                         break
                     print(line)
-
-        # options = ["3", "5", "6", "21"]
 
         assert len(options) == 4, "Not enough options"
         assert (options[0] in OPTIONS.keys() and options[1] in POSITION.keys()

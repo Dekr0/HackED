@@ -14,7 +14,6 @@ from singleton import *
 class Query(Singleton):
 
     def __init__(self):
-        self.
         self.app = QApplication(sys.argv)
         self.framework = MainFramework()
         self.window = QueryWindow(self.framework)
@@ -27,7 +26,8 @@ class Query(Singleton):
 
 class MainFramework(QWidget):
 
-    def __init__
+    def __init__:
+        pass
 
 
 class QueryWindow(QMainWindow):

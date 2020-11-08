@@ -66,7 +66,7 @@ class Analyze(Singleton):
                 else:
                     f_age_pos[name] = stat
 
-        if self.arg[3] == "33":
+        if self.arg[3] == "any":
             if f_age_pos:
                 return f_age_pos
             return False
