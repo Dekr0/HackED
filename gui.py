@@ -46,7 +46,7 @@ class MainFramework(QWidget):
         self.stat_box.setLayout(self.stat_layout)
 
     def init_pos_selection(self):
-        self.pos_box = QGroupBox("Player Position")
+        self.pos_box = QGroupBox("Position")
         self.pos_layout = QHBoxLayout()
         self.pos_combobox = QComboBox()
 
@@ -57,7 +57,7 @@ class MainFramework(QWidget):
         self.pos_box.setLayout(self.pos_layout)
 
     def init_age_selection(self):
-        self.age_box = QGroupBox("Player Position")
+        self.age_box = QGroupBox("Age Range")
         self.age_layout = QHBoxLayout()
         self.age_combobox = QComboBox()
 
@@ -66,6 +66,17 @@ class MainFramework(QWidget):
         self.age_layout.addWidget(self.age_combobox)
 
         self.age_box.setLayout(self.age_layout)
+
+    def init_team_selection(self):
+        self.team_box = QGroupBox("Team")
+        self.team_layout = QHBoxLayout()
+        self.team_combobox = QComboBox()
+
+        self.team_combobox.addItems(POSITION.values())
+
+        self.team_layout.addWidget(self.team_combobox)
+
+        self.team_box.setLayout(self.team_layout)
 
 class QueryWindow(QMainWindow):
     pass
