@@ -21,6 +21,7 @@ DATA_TAG = ["age",
             "plus_minus",
             "pen_min",
             "time_on_ice_avg",
+            "blocks",
             "hits",
             "faceoff_wins",
             "faceoff_percentage"

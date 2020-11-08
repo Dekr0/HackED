@@ -26,27 +26,58 @@ class Analyze:
         pass
 
     def best_goal(self):
+
+
+        j = max(self.filtered, key = lambda x: self.filtered[x]["goals"])
+        print(j)
+
         pass
 
     def best_play(self):
+        j = max(self.filtered, key = lambda x: self.filtered[x]["assists"])
+        print(j)
         pass
 
     def best_od(self):
+
+        #ONLY FOR POSITION = D
+        j = max(self.filtered, key = lambda x: self.filtered[x]["points"])
+        print(j)
         pass
 
     def best_pm(self):
+        #plus minus
+        j = max(self.filtered, key = lambda x: self.filtered[x]["plus_minus"])
+        print(j)
         pass
 
     def most_atoi(self):
+        j = max(self.filtered, key = lambda x: self.filtered[x]["time_on_ice_avg"])
+        print(j)
         pass
 
     def most_pim(self):
+        j = max(self.filtered, key = lambda x: self.filtered[x]["pen_min"])
+        print(j)
         pass
 
     def best_def(self):
+        j = max((0.3*(self.filtered, key = lambda x: self.filtered[x]["blocks"])+
+                (0.15*(self.filtered, key = lambda x: self.filtered[x]["hits"]))+
+                (0.15*(self.filtered, key = lambda x: self.filtered[x]["time_on_ice_avg"]))+
+                (0.2*(self.filtered, key = lambda x: self.filtered[x]["points"]))+
+                (0.2*(self.filtered, key = lambda x: self.filtered[x]["plus_minus"]))))
+        print(j)
         pass
 
     def best_for(self):
+        j = max((0.3*(self.filtered, key = lambda x: self.filtered[x]["goals"])+
+                (0.2*(self.filtered, key = lambda x: self.filtered[x]["assists"]))+
+                (0.1*(self.filtered, key = lambda x: self.filtered[x]["blocks"]))+
+                (0.1*(self.filtered, key = lambda x: self.filtered[x]["hits"]))+
+                (0.1*(self.filtered, key = lambda x: self.filtered[x]["plus_minus"]))+
+                (0.1*(self.filtered, key = lambda x: self.filtered[x]["faceoff_percentage"]))))
+        print(j)
         pass
 
     def filter(self):
